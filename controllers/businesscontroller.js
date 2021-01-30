@@ -66,4 +66,5 @@ router.get('/:id', (req,res) => {
     .then(bus => res.status(200).json(bus))
     .catch(err => res.status(500).json({error: err.message}))
 })
+
 module.exports = router; 
