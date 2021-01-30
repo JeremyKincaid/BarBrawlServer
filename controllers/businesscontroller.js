@@ -59,7 +59,8 @@ router.get('/my/:id', (req, res) => {
 })
 
 router.get('/:id', (req,res) => {
-    Business.findOne(req.body, {
+    Business.findOne(
+    {
         where: { id: req.params.id }
     })
     .then(bus => res.status(200).json(bus))
