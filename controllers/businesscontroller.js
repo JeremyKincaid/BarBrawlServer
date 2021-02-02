@@ -51,11 +51,11 @@ router.get('/', (req, res) => {
 
 //Returns an array of the user's businesses
 router.get('/my/:id', (req, res) => {
-    Business.findAll(req.body, {
+    Business.findAll({
         where: { userId: req.params.id }
     })
     .then(business => res.status(200).json(business))
-    .catch(err => res.status(500).json({error: err}));
+    .catch(err => res.status(500).json({error: err.message}));
 })
 
 router.get('/:id', (req,res) => {
@@ -67,4 +67,4 @@ router.get('/:id', (req,res) => {
     .catch(err => res.status(500).json({error: err.message}))
 })
 
-module.exports = router; 
+module.exports = router;

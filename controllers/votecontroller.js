@@ -13,11 +13,23 @@ router.post('/new', (req, res) => {
         res.status(200).json({
             vote: vote, 
             message: 'vote created successfully', 
-            sessionToken: token
+            sessionToken: validateSession.token
         })
     })
-    .catch(err => res.status(500).json({ error: err }))
+    .catch(err => res.status(500).json({ error: err.message }))
 })
+
+router.get('/count/:bra/:bus', (req, res) => {
+    Vote.findAll({
+        where: { 
+            brawlId: req.params.bra,
+            businessId: req.params.bus
+        }
+    })
+    .then(vote => res.status(200).json(vote))
+    .catch(err => res.status(500).json({error: err.message}));
+})
+
 
 router.put('/edit/:id', (req, res) => {
     Vote.update(req.body, {
